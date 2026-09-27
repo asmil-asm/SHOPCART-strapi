@@ -27,10 +27,17 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin =>
     config: {
       jwtManagement: 'refresh',
       sessions: {
-        httpOnly: true,
+        // ✅ التغيير الوحيد: 24 ساعة بدل ساعة
+        accessTokenLifespan: 86400,
+
+        maxRefreshTokenLifespan: 2592000,
+        idleRefreshTokenLifespan: 1209600,
+        maxSessionLifespan: 2592000,
+        idleSessionLifespan: 604800,
       },
     },
   },
+
   upload: {
     config: {
       security: {

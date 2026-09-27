@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "top_brands",
+  "info": {
+    "singularName": "top-brand",
+    "pluralName": "top-brands",
+    "displayName": "Top Brand"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "brand": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

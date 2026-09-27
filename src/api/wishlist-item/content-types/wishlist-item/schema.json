@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "wishlist_items",
+  "info": {
+    "singularName": "wishlist-item",
+    "pluralName": "wishlist-items",
+    "displayName": "wishlistItem"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "proudct": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::proudct.proudct",
+      "inversedBy": "wishlist_items"
+    },
+    "wishlist": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::wishlist.wishlist",
+      "inversedBy": "wishlist_items"
+    }
+  }
+}

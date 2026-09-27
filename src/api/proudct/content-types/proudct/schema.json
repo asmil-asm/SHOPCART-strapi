@@ -1,0 +1,116 @@
+{
+  "kind": "collectionType",
+  "collectionName": "proudcts",
+  "info": {
+    "singularName": "proudct",
+    "pluralName": "proudcts",
+    "displayName": "proudct"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "title_ar": {
+      "type": "string",
+      "required": true
+    },
+    "description_ar": {
+      "type": "text",
+      "required": true
+    },
+    "price": {
+      "type": "decimal",
+      "required": true
+    },
+    "rating": {
+      "type": "decimal",
+      "required": true
+    },
+    "slug": {
+      "type": "string",
+      "unique": true
+    },
+    "category_en": {
+      "type": "enumeration",
+      "enum": [
+        "Computers & Laptops",
+        "Audio & Headphones",
+        "Accessories",
+        "Gaming & VR",
+        "Monitors & Screens",
+        "Networking & Routers",
+        "Power & Batteries",
+        "Smartphones & Tablets",
+        "Storage & Memory",
+        "Wearables"
+      ]
+    },
+    "title_en": {
+      "type": "string",
+      "required": true
+    },
+    "discreption_en": {
+      "type": "text",
+      "required": true
+    },
+    "category_ar": {
+      "type": "enumeration",
+      "enum": [
+        "الإكسسوارات",
+        "الصوت والسماعات",
+        "أجهزة الكمبيوتر والمحمولة",
+        "الألعاب والإلكترونيات الترفيهية",
+        "الشاشات والإضاءة",
+        "الشبكات والاتصالات",
+        "الطاقة والبطاريات",
+        "الهواتف الذكية والأجهزة اللوحية",
+        "التخزين والذاكرة",
+        "الأجهزة القابلة للارتداء"
+      ]
+    },
+    "discount": {
+      "type": "integer"
+    },
+    "saling": {
+      "type": "integer"
+    },
+    "Recommended": {
+      "type": "boolean"
+    },
+    "time": {
+      "type": "date"
+    },
+    "product": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "cart_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::cart-item.cart-item",
+      "mappedBy": "proudct"
+    },
+    "wishlist_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::wishlist-item.wishlist-item",
+      "mappedBy": "proudct"
+    }
+   
+  }
+}
