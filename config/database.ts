@@ -11,7 +11,43 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Database 
     );
   }
 
-  const connections: Record<Core.Config.Database.ClientKind, Core.Config.Database['connection']> = {
+  // ✅ اتصال postgres في متغير منفصل بنوع any لتجنب مشكلة union narrowing
+  const postgresConnection: any = env('DATABASE_URL')
+    ? {
+        connectionString: env('DATABASE_URL'),
+        ssl: env.bool('DATABASE_SSL', true)
+          ? {
+              rejectUnauthorized: env.bool(
+                'DATABASE_SSL_REJECT_UNAUTHORIZED',
+                false
+              ),
+            }
+          : false,
+      }
+    : {
+        host: env('DATABASE_HOST', 'localhost'),
+        port: env.int('DATABASE_PORT', 5432),
+        database: env('DATABASE_NAME', 'strapi'),
+        user: env('DATABASE_USERNAME', 'strapi'),
+        password: env('DATABASE_PASSWORD', 'strapi'),
+        ssl: env.bool('DATABASE_SSL', false) && {
+          key: env('DATABASE_SSL_KEY', undefined),
+          cert: env('DATABASE_SSL_CERT', undefined),
+          ca: env('DATABASE_SSL_CA', undefined),
+          capath: env('DATABASE_SSL_CAPATH', undefined),
+          cipher: env('DATABASE_SSL_CIPHER', undefined),
+          rejectUnauthorized: env.bool(
+            'DATABASE_SSL_REJECT_UNAUTHORIZED',
+            true
+          ),
+        },
+        schema: env('DATABASE_SCHEMA', 'public'),
+      };
+
+  const connections: Record<
+    Core.Config.Database.ClientKind,
+    Core.Config.Database['connection']
+  > = {
     mysql: {
       client: 'mysql',
       connection: {
@@ -29,33 +65,30 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Database 
           rejectUnauthorized: env.bool('DATABASE_SSL_REJECT_UNAUTHORIZED', true),
         },
       },
-      pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) },
+      pool: {
+        min: env.int('DATABASE_POOL_MIN', 2),
+        max: env.int('DATABASE_POOL_MAX', 10),
+      },
     },
+
     postgres: {
       client: 'postgres',
-      connection: {
-        connectionString: env('DATABASE_URL'),
-        host: env('DATABASE_HOST', 'localhost'),
-        port: env.int('DATABASE_PORT', 5432),
-        database: env('DATABASE_NAME', 'strapi'),
-        user: env('DATABASE_USERNAME', 'strapi'),
-        password: env('DATABASE_PASSWORD', 'strapi'),
-        ssl: env.bool('DATABASE_SSL', false) && {
-          key: env('DATABASE_SSL_KEY', undefined),
-          cert: env('DATABASE_SSL_CERT', undefined),
-          ca: env('DATABASE_SSL_CA', undefined),
-          capath: env('DATABASE_SSL_CAPATH', undefined),
-          cipher: env('DATABASE_SSL_CIPHER', undefined),
-          rejectUnauthorized: env.bool('DATABASE_SSL_REJECT_UNAUTHORIZED', true),
-        },
-        schema: env('DATABASE_SCHEMA', 'public'),
+      connection: postgresConnection, // ✅ متغير منفصل بنوع any
+      pool: {
+        min: env.int('DATABASE_POOL_MIN', 0),
+        max: env.int('DATABASE_POOL_MAX', 10),
       },
-      pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) },
     },
+
     sqlite: {
       client: 'sqlite',
       connection: {
-        filename: path.join(__dirname, '..', '..', env('DATABASE_FILENAME', '.tmp/data.db')),
+        filename: path.join(
+          __dirname,
+          '..',
+          '..',
+          env('DATABASE_FILENAME', '.tmp/data.db')
+        ),
       },
       useNullAsDefault: true,
     },
