@@ -1,61 +1,49 @@
-# 🚀 Getting started with Strapi
+# 🛠️ SHOPCART Backend — Strapi Headless CMS & REST API
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+The backend service for **SHOPCART**, an e-commerce platform.  
+Built with **Strapi 5**, it provides a flexible headless CMS and a ready-to-use REST API for managing products, categories, carts, orders, and other store data consumed by the SHOPCART React frontend.
 
-### `develop`
-
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
-
-```
-npm run develop
-# or
-yarn develop
-```
-
-### `start`
-
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
-
-```
-npm run start
-# or
-yarn start
-```
-
-### `build`
-
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
-
-```
-npm run build
-# or
-yarn build
-```
-
-## ⚙️ Deployment
-
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
-
-```
-yarn strapi deploy
-```
-
-## 📚 Learn more
-
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
-
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
-
-## ✨ Community
-
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
+> ⚠️ **Note:** The current `README.md` in this repository is still the default Strapi template. This document replaces it with project-specific documentation.
 
 ---
 
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+## ✨ Features
+
+- **Headless CMS** — Auto-generated admin panel to manage all store content without writing code.
+- **REST API** — Clean, versioned endpoints consumed by the SHOPCART frontend.
+- **Product Management** — Full CRUD for products, categories, and top brands.
+- **Cart & Checkout** — Content types for `cart`, `cart-item`, `order`, and `order-item` to support the shopping flow.
+- **Shipping & Contact** — Dedicated content types for `shipping-info` and `contact` submissions.
+- **Blog Support** — A `blog` content type for store news, guides, or announcements.
+- **JWT Authentication** — Built-in user authentication via Strapi's Users & Permissions plugin.
+- **Media Library** — Upload and serve product images and other assets.
+- **Role-Based Access Control (RBAC)** — Configure public and authenticated permissions per content type.
+
+---
+
+## 🧰 Tech Stack
+
+| Category | Technologies |
+|---|---|
+| **CMS / Framework** | Strapi 5 |
+| **Runtime** | Node.js 20+ |
+| **Language** | TypeScript |
+| **Database (Dev)** | SQLite |
+| **Database (Prod)** | PostgreSQL (recommended) |
+| **API Style** | REST (GraphQL plugin optional) |
+| **Auth** | JWT (Strapi Users & Permissions) |
+| **File Storage** | Local (default), S3/Cloudinary (optional) |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- **Node.js 20+**
+- **npm** or **yarn**
+- **Git**
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/asmil-asm/SHOPCART-strapi.git
+cd SHOPCART-strapi
