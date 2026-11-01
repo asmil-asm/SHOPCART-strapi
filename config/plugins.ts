@@ -27,9 +27,8 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin =>
     config: {
       jwtManagement: 'refresh',
       sessions: {
-        // ✅ التغيير الوحيد: 24 ساعة بدل ساعة
+        // 24 ساعة بدل ساعة
         accessTokenLifespan: 86400,
-
         maxRefreshTokenLifespan: 2592000,
         idleRefreshTokenLifespan: 1209600,
         maxSessionLifespan: 2592000,
@@ -40,6 +39,17 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin =>
 
   upload: {
     config: {
+      provider: 'cloudinary',
+      providerOptions: {
+        cloud_name: env('CLOUDINARY_NAME'),
+        api_key: env('CLOUDINARY_KEY'),
+        api_secret: env('CLOUDINARY_SECRET'),
+      },
+      actionOptions: {
+        upload: {},
+        uploadStream: {},
+        delete: {},
+      },
       security: {
         allowedTypes: allowedMediaTypes,
         deniedTypes: deniedExecutableTypes,
