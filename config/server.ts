@@ -4,7 +4,8 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Server =>
   host: env('HOST', '0.0.0.0'),
   port: env.int('PORT', 1337),
   
-  url: env('PUBLIC_URL', 'http://localhost:1337'),
+  // اجعلها تبحث عن متغير البيئة URL أولاً، ثم PUBLIC_URL، ثم الرابط الخاص بك على Render افتراضياً
+  url: env('URL', env('PUBLIC_URL', 'https://shopcart-back-end.onrender.com')),
 
   app: {
     keys: env.array('APP_KEYS')!,
