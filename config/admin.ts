@@ -1,11 +1,14 @@
 import type { Core } from '@strapi/strapi';
 
 const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Admin => ({
-  url: '/admin',
+  url: env('URL', 'https://shopcart-back-end.onrender.com') + '/admin',
+  
   auth: {
     secret: env('ADMIN_JWT_SECRET')!,
     cookie: {
       path: '/admin',
+      // مهم جداً على المنصات السحابية مثل Render لتفعيل ملفات تعريف الارتباط عبر HTTPS
+      secure: env.bool('ADMIN_JWT_SECURE', true), 
     },
   },
   apiToken: {
